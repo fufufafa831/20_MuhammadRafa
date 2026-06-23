@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Masuk - TiketGo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0A2540;
+      --blue-mid: #1a3d6b;
+      --orange: #FF6B35;
+      --orange-light: #ff8c5a;
+      --white: #ffffff;
+      --gray: #f4f6f9;
+      --gray-text: #6b7280;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      background: var(--gray);
+    }
+
+    /* NAVBAR */
+    nav {
+      background: var(--blue); padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    .logo { color: var(--white); font-size: 1.5rem; font-weight: 800; text-decoration: none; }
+    .logo span { color: var(--orange); }
+    .nav-link { color: rgba(255,255,255,0.75); font-size: 0.88rem; text-decoration: none; }
+    .nav-link:hover { color: var(--white); }
+
+    /* MAIN */
+    main {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .card-wrap {
+      display: flex; width: 100%; max-width: 900px;
+      background: var(--white); border-radius: 20px;
+      overflow: hidden; box-shadow: 0 12px 48px rgba(10,37,64,0.14);
+    }
+
+    /* LEFT PANEL */
+    .left-panel {
+      flex: 1; background: linear-gradient(145deg, var(--blue) 0%, #1e5fa8 100%);
+      padding: 50px 40px; color: var(--white);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .left-panel .brand { font-size: 2rem; font-weight: 800; margin-bottom: 12px; }
+    .left-panel .brand span { color: var(--orange); }
+    .left-panel p { font-size: 0.95rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 32px; }
+    .perks { display: flex; flex-direction: column; gap: 14px; }
+    .perk { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: rgba(255,255,255,0.85); }
+    .perk-icon { width: 36px; height: 36px; background: rgba(255,255,255,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+
+    /* RIGHT PANEL */
+    .right-panel { flex: 1; padding: 50px 44px; display: flex; flex-direction: column; justify-content: center; }
+    .right-panel h1 { font-size: 1.7rem; font-weight: 700; color: var(--blue); margin-bottom: 6px; }
+    .right-panel .sub { color: var(--gray-text); font-size: 0.88rem; margin-bottom: 32px; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .input-wrap { position: relative; }
+    .input-wrap .icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+    .form-group input {
+      width: 100%; padding: 12px 14px 12px 42px;
+      border: 1.5px solid #dde3ea; border-radius: 10px;
+      font-family: 'Poppins', sans-serif; font-size: 0.92rem;
+      color: var(--blue); background: #f8fafc; outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,107,53,0.12); }
+    .toggle-pass { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1rem; user-select: none; }
+
+    .forgot { text-align: right; margin-top: -12px; margin-bottom: 22px; }
+    .forgot a { font-size: 0.8rem; color: var(--orange); text-decoration: none; font-weight: 500; }
+    .forgot a:hover { text-decoration: underline; }
+
+    .btn-submit {
+      width: 100%; padding: 14px; border-radius: 10px; border: none;
+      background: var(--orange); color: var(--white);
+      font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s, transform 0.1s;
+      margin-bottom: 20px;
+    }
+    .btn-submit:hover { background: var(--orange-light); }
+    .btn-submit:active { transform: scale(0.98); }
+
+    .divider { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; color: #ccc; font-size: 0.82rem; }
+    .divider::before, .divider::after { content:''; flex:1; height:1px; background:#eee; }
+
+    .register-link { text-align: center; font-size: 0.88rem; color: var(--gray-text); }
+    .register-link a { color: var(--orange); font-weight: 600; text-decoration: none; }
+    .register-link a:hover { text-decoration: underline; }
+
+    .error-box {
+      display: none; background: #fff2f0; border: 1px solid #ffb3a7;
+      border-radius: 8px; padding: 12px 16px; margin-bottom: 20px;
+      color: #c0392b; font-size: 0.85rem; font-weight: 500;
+    }
+    .error-box.show { display: flex; align-items: center; gap: 8px; }
+
+    @media (max-width: 640px) {
+      .left-panel { display: none; }
+      .right-panel { padding: 36px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Tiket<span>Go</span></a>
+  <a href="register.html" class="nav-link">Belum punya akun? <strong>Daftar</strong></a>
+</nav>
+
+<main>
+  <div class="card-wrap">
+
+    <!-- LEFT -->
+    <div class="left-panel">
+      <div class="brand">Tiket<span>Go</span></div>
+      <p>Masuk ke akunmu dan nikmati kemudahan memesan tiket perjalanan ke mana saja!</p>
+      <div class="perks">
+        <div class="perk"><div class="perk-icon">✈️</div> Ribuan rute tersedia</div>
+        <div class="perk"><div class="perk-icon">💰</div> Harga terbaik dijamin</div>
+        <div class="perk"><div class="perk-icon">⚡</div> Proses cepat & mudah</div>
+        <div class="perk"><div class="perk-icon">🔒</div> Transaksi aman terpercaya</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-panel">
+      <h1>Selamat Datang! 👋</h1>
+      <p class="sub">Masuk ke akun TiketGo kamu</p>
+
+      <div class="error-box" id="errorBox">⚠️ <span id="errorMsg"></span></div>
+
+      <div class="form-group">
+        <label>Username</label>
+        <div class="input-wrap">
+          <span class="icon">👤</span>
+          <input type="text" id="inputUsername" placeholder="Masukkan username kamu" autocomplete="username"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-wrap">
+          <span class="icon">🔒</span>
+          <input type="password" id="inputPassword" placeholder="Masukkan password kamu" autocomplete="current-password"/>
+          <span class="toggle-pass" onclick="togglePass()">👁️</span>
+        </div>
+      </div>
+
+      <div class="forgot"><a href="#">Lupa password?</a></div>
+
+      <button class="btn-submit" onclick="doLogin()">Masuk →</button>
+
+      <div class="divider">atau</div>
+
+      <p class="register-link">Belum punya akun? <a href="register.html">Daftar sekarang</a></p>
+    </div>
+  </div>
+</main>
+
+<script src="app.js"></script>
+<script>
+  // Redirect jika sudah login
+  if (getUser()) location.href = 'index.html';
+
+  function togglePass() {
+    const inp = document.getElementById('inputPassword');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  }
+
+  function showError(msg) {
+    const box = document.getElementById('errorBox');
+    document.getElementById('errorMsg').textContent = msg;
+    box.classList.add('show');
+  }
+
+  function doLogin() {
+    const username = document.getElementById('inputUsername').value.trim();
+    const password = document.getElementById('inputPassword').value;
+
+    document.getElementById('errorBox').classList.remove('show');
+
+    if (!username || !password) { showError('Username dan password wajib diisi!'); return; }
+
+    const users = JSON.parse(localStorage.getItem('tiketgo_users') || '[]');
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (!user) { showError('Username atau password salah. Silakan coba lagi.'); return; }
+
+    // Simpan sesi
+    localStorage.setItem('tiketgo_session', JSON.stringify({ username: user.username, email: user.email }));
+    location.href = 'index.html';
+  }
+
+  // Enter key
+  document.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+</script>
+</body>
+</html>
