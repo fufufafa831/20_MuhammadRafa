@@ -201,10 +201,48 @@
     }
     .toast.show { opacity: 1; }
 
+    /* VIDEO SECTION */
+    .video-section { padding: 60px 5%; background: var(--white); }
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+    .video-card {
+      border-radius: 14px; overflow: hidden;
+      box-shadow: var(--shadow); background: #000;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .video-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(10,37,64,0.16); }
+    .video-card iframe {
+      width: 100%; aspect-ratio: 16/9;
+      border: none; display: block;
+    }
+    .video-info { background: var(--white); padding: 14px 16px; }
+    .video-info h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: var(--blue); }
+    .video-info p { font-size: 0.8rem; color: var(--gray-text); }
+
+    /* MAP SECTION */
+    .map-section { padding: 60px 5%; background: var(--gray); }
+    .map-wrap {
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(10,37,64,0.12);
+      border: 3px solid var(--white);
+    }
+    .map-wrap iframe { width: 100%; height: 420px; border: none; display: block; }
+    .map-info-row {
+      display: flex; flex-wrap: wrap; gap: 20px; margin-top: 22px;
+    }
+    .map-info-card {
+      flex: 1; min-width: 200px; background: var(--white);
+      border-radius: 12px; padding: 18px 20px;
+      box-shadow: var(--shadow); display: flex; gap: 14px; align-items: flex-start;
+    }
+    .map-info-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .map-info-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+    .map-info-card p { font-size: 0.8rem; color: var(--gray-text); line-height: 1.5; }
+
     @media (max-width: 700px) {
       .hero h1 { font-size: 1.8rem; }
       .search-fields { grid-template-columns: 1fr 1fr; }
       .search-fields .btn-search { grid-column: span 2; }
+      .map-wrap iframe { height: 260px; }
     }
   </style>
 </head>
@@ -330,6 +368,90 @@
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
+
+<!-- VIDEO DESTINASI -->
+<section class="video-section">
+  <div class="section-title">🎬 Destinasi Wisata Populer</div>
+  <div class="section-sub">Temukan inspirasi perjalananmu lewat video-video destinasi terbaik Indonesia</div>
+  <div class="video-grid">
+
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/nFkG_tHSYEI" title="Bali Indonesia"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen loading="lazy"></iframe>
+      <div class="video-info">
+        <h3>🌴 Pesona Bali</h3>
+        <p>Surga tropis dengan budaya dan alam yang memukau</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/5HBb_DxjPBA" title="Yogyakarta"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen loading="lazy"></iframe>
+      <div class="video-info">
+        <h3>🏛️ Yogyakarta</h3>
+        <p>Kota budaya, keraton, dan kuliner khas Jawa</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/LQoZMTF9JpI" title="Raja Ampat"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen loading="lazy"></iframe>
+      <div class="video-info">
+        <h3>🤿 Raja Ampat</h3>
+        <p>Keajaiban bawah laut terbaik di dunia</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LOKASI / MAPS -->
+<section class="map-section">
+  <div class="section-title">📍 Temukan Kami</div>
+  <div class="section-sub">Kantor pusat TiketGo — siap melayani perjalananmu</div>
+
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.2!2d110.3695!3d-7.7956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x2a00ec7f877a0!2sMalioboro%2C%20Yogyakarta!5e0!3m2!1sid!2sid!4v1700000000000"
+      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Lokasi TiketGo Yogyakarta">
+    </iframe>
+  </div>
+
+  <div class="map-info-row">
+    <div class="map-info-card">
+      <div class="map-info-icon">🏢</div>
+      <div>
+        <h4>Kantor Pusat</h4>
+        <p>Jl. Malioboro No. 1, Yogyakarta<br/>DI Yogyakarta 55213</p>
+      </div>
+    </div>
+    <div class="map-info-card">
+      <div class="map-info-icon">🕐</div>
+      <div>
+        <h4>Jam Operasional</h4>
+        <p>Senin – Jumat: 08.00 – 17.00<br/>Sabtu: 09.00 – 14.00</p>
+      </div>
+    </div>
+    <div class="map-info-card">
+      <div class="map-info-icon">📞</div>
+      <div>
+        <h4>Hubungi Kami</h4>
+        <p>Telp: (0274) 123-4567<br/>Email: halo@tiketgo.id</p>
+      </div>
+    </div>
+    <div class="map-info-card">
+      <div class="map-info-icon">💬</div>
+      <div>
+        <h4>Customer Service</h4>
+        <p>WhatsApp: 0811-2345-678<br/>Tersedia 24 jam / 7 hari</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
